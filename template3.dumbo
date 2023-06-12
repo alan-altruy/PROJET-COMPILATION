@@ -1,0 +1,5 @@
+{{
+a := 'not ok';
+if 2 < 1 do a := 'ok'; endif;
+print a;
+}}

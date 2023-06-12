@@ -1,0 +1,14 @@
+<html>
+<head><title>Films {{ print label; }}</title></head>
+<body>
+<h1><b>Films {{ print label; }}</b></h1>
+{{
+for nom_film in liste_label do
+    print nom_film;
+	print '<br />';
+	print nom_film;
+	print '<test />';
+	endfor;
+}}
+</body>
+</html>

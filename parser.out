@@ -1,0 +1,1018 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> programme
+Rule 1     programme -> TXT
+Rule 2     programme -> TXT programme
+Rule 3     programme -> dumbo_bloc
+Rule 4     programme -> dumbo_bloc programme
+Rule 5     dumbo_bloc -> LDUMBO expressions_list RDUMBO
+Rule 6     dumbo_bloc -> LDUMBO RDUMBO
+Rule 7     expressions_list -> expression SEMICOLON expressions_list
+Rule 8     expressions_list -> expression SEMICOLON
+Rule 9     expression -> PRINT string_expression
+Rule 10    expression -> FOR VARIABLE IN string_list DO expressions_list ENDFOR
+Rule 11    expression -> FOR VARIABLE IN VARIABLE DO expressions_list ENDFOR
+Rule 12    expression -> IF boolean_expression DO expressions_list ENDIF
+Rule 13    expression -> VARIABLE ASSIGNATION string_expression
+Rule 14    expression -> VARIABLE ASSIGNATION string_list
+Rule 15    expression -> VARIABLE ASSIGNATION int_expression
+Rule 16    expression -> VARIABLE ASSIGNATION boolean_expression
+Rule 17    string_expression -> STRING
+Rule 18    string_expression -> VARIABLE
+Rule 19    string_expression -> string_expression DOT string_expression
+Rule 20    int_expression -> INT
+Rule 21    int_expression -> int_term ADD_OP int_term
+Rule 22    int_expression -> int_term MUL_OP int_term
+Rule 23    int_term -> VARIABLE
+Rule 24    int_term -> int_expression
+Rule 25    int_term -> LPAR int_expression RPAR
+Rule 26    boolean_expression -> BOOL
+Rule 27    boolean_expression -> int_term COMP int_term
+Rule 28    boolean_expression -> boolean_term OR boolean_term
+Rule 29    boolean_expression -> boolean_term AND boolean_term
+Rule 30    boolean_term -> VARIABLE
+Rule 31    boolean_term -> boolean_expression
+Rule 32    string_list -> LPAR string_list_interior RPAR
+Rule 33    string_list_interior -> STRING
+Rule 34    string_list_interior -> STRING COMMA string_list_interior
+
+Terminals, with rules where they appear
+
+ADD_OP               : 21
+AND                  : 29
+ASSIGNATION          : 13 14 15 16
+BOOL                 : 26
+COMMA                : 34
+COMP                 : 27
+DO                   : 10 11 12
+DOT                  : 19
+ENDFOR               : 10 11
+ENDIF                : 12
+FOR                  : 10 11
+IF                   : 12
+IN                   : 10 11
+INT                  : 20
+LDUMBO               : 5 6
+LPAR                 : 25 32
+MUL_OP               : 22
+OR                   : 28
+PRINT                : 9
+RDUMBO               : 5 6
+RPAR                 : 25 32
+SEMICOLON            : 7 8
+STRING               : 17 33 34
+TXT                  : 1 2
+VARIABLE             : 10 11 11 13 14 15 16 18 23 30
+error                : 
+
+Nonterminals, with rules where they appear
+
+boolean_expression   : 12 16 31
+boolean_term         : 28 28 29 29
+dumbo_bloc           : 3 4
+expression           : 7 8
+expressions_list     : 5 7 10 11 12
+int_expression       : 15 24 25
+int_term             : 21 21 22 22 27 27
+programme            : 2 4 0
+string_expression    : 9 13 19 19
+string_list          : 10 14
+string_list_interior : 32 34
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . programme
+    (1) programme -> . TXT
+    (2) programme -> . TXT programme
+    (3) programme -> . dumbo_bloc
+    (4) programme -> . dumbo_bloc programme
+    (5) dumbo_bloc -> . LDUMBO expressions_list RDUMBO
+    (6) dumbo_bloc -> . LDUMBO RDUMBO
+
+    TXT             shift and go to state 2
+    LDUMBO          shift and go to state 4
+
+    programme                      shift and go to state 1
+    dumbo_bloc                     shift and go to state 3
+
+state 1
+
+    (0) S' -> programme .
+
+
+
+state 2
+
+    (1) programme -> TXT .
+    (2) programme -> TXT . programme
+    (1) programme -> . TXT
+    (2) programme -> . TXT programme
+    (3) programme -> . dumbo_bloc
+    (4) programme -> . dumbo_bloc programme
+    (5) dumbo_bloc -> . LDUMBO expressions_list RDUMBO
+    (6) dumbo_bloc -> . LDUMBO RDUMBO
+
+    $end            reduce using rule 1 (programme -> TXT .)
+    TXT             shift and go to state 2
+    LDUMBO          shift and go to state 4
+
+    programme                      shift and go to state 5
+    dumbo_bloc                     shift and go to state 3
+
+state 3
+
+    (3) programme -> dumbo_bloc .
+    (4) programme -> dumbo_bloc . programme
+    (1) programme -> . TXT
+    (2) programme -> . TXT programme
+    (3) programme -> . dumbo_bloc
+    (4) programme -> . dumbo_bloc programme
+    (5) dumbo_bloc -> . LDUMBO expressions_list RDUMBO
+    (6) dumbo_bloc -> . LDUMBO RDUMBO
+
+    $end            reduce using rule 3 (programme -> dumbo_bloc .)
+    TXT             shift and go to state 2
+    LDUMBO          shift and go to state 4
+
+    dumbo_bloc                     shift and go to state 3
+    programme                      shift and go to state 6
+
+state 4
+
+    (5) dumbo_bloc -> LDUMBO . expressions_list RDUMBO
+    (6) dumbo_bloc -> LDUMBO . RDUMBO
+    (7) expressions_list -> . expression SEMICOLON expressions_list
+    (8) expressions_list -> . expression SEMICOLON
+    (9) expression -> . PRINT string_expression
+    (10) expression -> . FOR VARIABLE IN string_list DO expressions_list ENDFOR
+    (11) expression -> . FOR VARIABLE IN VARIABLE DO expressions_list ENDFOR
+    (12) expression -> . IF boolean_expression DO expressions_list ENDIF
+    (13) expression -> . VARIABLE ASSIGNATION string_expression
+    (14) expression -> . VARIABLE ASSIGNATION string_list
+    (15) expression -> . VARIABLE ASSIGNATION int_expression
+    (16) expression -> . VARIABLE ASSIGNATION boolean_expression
+
+    RDUMBO          shift and go to state 8
+    PRINT           shift and go to state 10
+    FOR             shift and go to state 11
+    IF              shift and go to state 13
+    VARIABLE        shift and go to state 12
+
+    expressions_list               shift and go to state 7
+    expression                     shift and go to state 9
+
+state 5
+
+    (2) programme -> TXT programme .
+
+    $end            reduce using rule 2 (programme -> TXT programme .)
+
+
+state 6
+
+    (4) programme -> dumbo_bloc programme .
+
+    $end            reduce using rule 4 (programme -> dumbo_bloc programme .)
+
+
+state 7
+
+    (5) dumbo_bloc -> LDUMBO expressions_list . RDUMBO
+
+    RDUMBO          shift and go to state 14
+
+
+state 8
+
+    (6) dumbo_bloc -> LDUMBO RDUMBO .
+
+    TXT             reduce using rule 6 (dumbo_bloc -> LDUMBO RDUMBO .)
+    LDUMBO          reduce using rule 6 (dumbo_bloc -> LDUMBO RDUMBO .)
+    $end            reduce using rule 6 (dumbo_bloc -> LDUMBO RDUMBO .)
+
+
+state 9
+
+    (7) expressions_list -> expression . SEMICOLON expressions_list
+    (8) expressions_list -> expression . SEMICOLON
+
+    SEMICOLON       shift and go to state 15
+
+
+state 10
+
+    (9) expression -> PRINT . string_expression
+    (17) string_expression -> . STRING
+    (18) string_expression -> . VARIABLE
+    (19) string_expression -> . string_expression DOT string_expression
+
+    STRING          shift and go to state 17
+    VARIABLE        shift and go to state 18
+
+    string_expression              shift and go to state 16
+
+state 11
+
+    (10) expression -> FOR . VARIABLE IN string_list DO expressions_list ENDFOR
+    (11) expression -> FOR . VARIABLE IN VARIABLE DO expressions_list ENDFOR
+
+    VARIABLE        shift and go to state 19
+
+
+state 12
+
+    (13) expression -> VARIABLE . ASSIGNATION string_expression
+    (14) expression -> VARIABLE . ASSIGNATION string_list
+    (15) expression -> VARIABLE . ASSIGNATION int_expression
+    (16) expression -> VARIABLE . ASSIGNATION boolean_expression
+
+    ASSIGNATION     shift and go to state 20
+
+
+state 13
+
+    (12) expression -> IF . boolean_expression DO expressions_list ENDIF
+    (26) boolean_expression -> . BOOL
+    (27) boolean_expression -> . int_term COMP int_term
+    (28) boolean_expression -> . boolean_term OR boolean_term
+    (29) boolean_expression -> . boolean_term AND boolean_term
+    (23) int_term -> . VARIABLE
+    (24) int_term -> . int_expression
+    (25) int_term -> . LPAR int_expression RPAR
+    (30) boolean_term -> . VARIABLE
+    (31) boolean_term -> . boolean_expression
+    (20) int_expression -> . INT
+    (21) int_expression -> . int_term ADD_OP int_term
+    (22) int_expression -> . int_term MUL_OP int_term
+
+    BOOL            shift and go to state 22
+    VARIABLE        shift and go to state 25
+    LPAR            shift and go to state 27
+    INT             shift and go to state 28
+
+    boolean_expression             shift and go to state 21
+    int_term                       shift and go to state 23
+    boolean_term                   shift and go to state 24
+    int_expression                 shift and go to state 26
+
+state 14
+
+    (5) dumbo_bloc -> LDUMBO expressions_list RDUMBO .
+
+    TXT             reduce using rule 5 (dumbo_bloc -> LDUMBO expressions_list RDUMBO .)
+    LDUMBO          reduce using rule 5 (dumbo_bloc -> LDUMBO expressions_list RDUMBO .)
+    $end            reduce using rule 5 (dumbo_bloc -> LDUMBO expressions_list RDUMBO .)
+
+
+state 15
+
+    (7) expressions_list -> expression SEMICOLON . expressions_list
+    (8) expressions_list -> expression SEMICOLON .
+    (7) expressions_list -> . expression SEMICOLON expressions_list
+    (8) expressions_list -> . expression SEMICOLON
+    (9) expression -> . PRINT string_expression
+    (10) expression -> . FOR VARIABLE IN string_list DO expressions_list ENDFOR
+    (11) expression -> . FOR VARIABLE IN VARIABLE DO expressions_list ENDFOR
+    (12) expression -> . IF boolean_expression DO expressions_list ENDIF
+    (13) expression -> . VARIABLE ASSIGNATION string_expression
+    (14) expression -> . VARIABLE ASSIGNATION string_list
+    (15) expression -> . VARIABLE ASSIGNATION int_expression
+    (16) expression -> . VARIABLE ASSIGNATION boolean_expression
+
+    RDUMBO          reduce using rule 8 (expressions_list -> expression SEMICOLON .)
+    ENDIF           reduce using rule 8 (expressions_list -> expression SEMICOLON .)
+    ENDFOR          reduce using rule 8 (expressions_list -> expression SEMICOLON .)
+    PRINT           shift and go to state 10
+    FOR             shift and go to state 11
+    IF              shift and go to state 13
+    VARIABLE        shift and go to state 12
+
+    expression                     shift and go to state 9
+    expressions_list               shift and go to state 29
+
+state 16
+
+    (9) expression -> PRINT string_expression .
+    (19) string_expression -> string_expression . DOT string_expression
+
+    SEMICOLON       reduce using rule 9 (expression -> PRINT string_expression .)
+    DOT             shift and go to state 30
+
+
+state 17
+
+    (17) string_expression -> STRING .
+
+    DOT             reduce using rule 17 (string_expression -> STRING .)
+    SEMICOLON       reduce using rule 17 (string_expression -> STRING .)
+
+
+state 18
+
+    (18) string_expression -> VARIABLE .
+
+    DOT             reduce using rule 18 (string_expression -> VARIABLE .)
+    SEMICOLON       reduce using rule 18 (string_expression -> VARIABLE .)
+
+
+state 19
+
+    (10) expression -> FOR VARIABLE . IN string_list DO expressions_list ENDFOR
+    (11) expression -> FOR VARIABLE . IN VARIABLE DO expressions_list ENDFOR
+
+    IN              shift and go to state 31
+
+
+state 20
+
+    (13) expression -> VARIABLE ASSIGNATION . string_expression
+    (14) expression -> VARIABLE ASSIGNATION . string_list
+    (15) expression -> VARIABLE ASSIGNATION . int_expression
+    (16) expression -> VARIABLE ASSIGNATION . boolean_expression
+    (17) string_expression -> . STRING
+    (18) string_expression -> . VARIABLE
+    (19) string_expression -> . string_expression DOT string_expression
+    (32) string_list -> . LPAR string_list_interior RPAR
+    (20) int_expression -> . INT
+    (21) int_expression -> . int_term ADD_OP int_term
+    (22) int_expression -> . int_term MUL_OP int_term
+    (26) boolean_expression -> . BOOL
+    (27) boolean_expression -> . int_term COMP int_term
+    (28) boolean_expression -> . boolean_term OR boolean_term
+    (29) boolean_expression -> . boolean_term AND boolean_term
+    (23) int_term -> . VARIABLE
+    (24) int_term -> . int_expression
+    (25) int_term -> . LPAR int_expression RPAR
+    (30) boolean_term -> . VARIABLE
+    (31) boolean_term -> . boolean_expression
+
+    STRING          shift and go to state 17
+    VARIABLE        shift and go to state 32
+    LPAR            shift and go to state 37
+    INT             shift and go to state 28
+    BOOL            shift and go to state 22
+
+    string_expression              shift and go to state 33
+    string_list                    shift and go to state 34
+    int_expression                 shift and go to state 35
+    boolean_expression             shift and go to state 36
+    int_term                       shift and go to state 38
+    boolean_term                   shift and go to state 24
+
+state 21
+
+    (12) expression -> IF boolean_expression . DO expressions_list ENDIF
+    (31) boolean_term -> boolean_expression .
+
+    DO              shift and go to state 39
+    OR              reduce using rule 31 (boolean_term -> boolean_expression .)
+    AND             reduce using rule 31 (boolean_term -> boolean_expression .)
+
+
+state 22
+
+    (26) boolean_expression -> BOOL .
+
+    DO              reduce using rule 26 (boolean_expression -> BOOL .)
+    OR              reduce using rule 26 (boolean_expression -> BOOL .)
+    AND             reduce using rule 26 (boolean_expression -> BOOL .)
+    SEMICOLON       reduce using rule 26 (boolean_expression -> BOOL .)
+
+
+state 23
+
+    (27) boolean_expression -> int_term . COMP int_term
+    (21) int_expression -> int_term . ADD_OP int_term
+    (22) int_expression -> int_term . MUL_OP int_term
+
+    COMP            shift and go to state 40
+    ADD_OP          shift and go to state 41
+    MUL_OP          shift and go to state 42
+
+
+state 24
+
+    (28) boolean_expression -> boolean_term . OR boolean_term
+    (29) boolean_expression -> boolean_term . AND boolean_term
+
+    OR              shift and go to state 43
+    AND             shift and go to state 44
+
+
+state 25
+
+    (23) int_term -> VARIABLE .
+    (30) boolean_term -> VARIABLE .
+
+    COMP            reduce using rule 23 (int_term -> VARIABLE .)
+    ADD_OP          reduce using rule 23 (int_term -> VARIABLE .)
+    MUL_OP          reduce using rule 23 (int_term -> VARIABLE .)
+    OR              reduce using rule 30 (boolean_term -> VARIABLE .)
+    AND             reduce using rule 30 (boolean_term -> VARIABLE .)
+
+
+state 26
+
+    (24) int_term -> int_expression .
+
+    COMP            reduce using rule 24 (int_term -> int_expression .)
+    ADD_OP          reduce using rule 24 (int_term -> int_expression .)
+    MUL_OP          reduce using rule 24 (int_term -> int_expression .)
+    DO              reduce using rule 24 (int_term -> int_expression .)
+    OR              reduce using rule 24 (int_term -> int_expression .)
+    AND             reduce using rule 24 (int_term -> int_expression .)
+    SEMICOLON       reduce using rule 24 (int_term -> int_expression .)
+    RPAR            reduce using rule 24 (int_term -> int_expression .)
+
+
+state 27
+
+    (25) int_term -> LPAR . int_expression RPAR
+    (20) int_expression -> . INT
+    (21) int_expression -> . int_term ADD_OP int_term
+    (22) int_expression -> . int_term MUL_OP int_term
+    (23) int_term -> . VARIABLE
+    (24) int_term -> . int_expression
+    (25) int_term -> . LPAR int_expression RPAR
+
+    INT             shift and go to state 28
+    VARIABLE        shift and go to state 47
+    LPAR            shift and go to state 27
+
+    int_expression                 shift and go to state 45
+    int_term                       shift and go to state 46
+
+state 28
+
+    (20) int_expression -> INT .
+
+    COMP            reduce using rule 20 (int_expression -> INT .)
+    ADD_OP          reduce using rule 20 (int_expression -> INT .)
+    MUL_OP          reduce using rule 20 (int_expression -> INT .)
+    SEMICOLON       reduce using rule 20 (int_expression -> INT .)
+    RPAR            reduce using rule 20 (int_expression -> INT .)
+    DO              reduce using rule 20 (int_expression -> INT .)
+    OR              reduce using rule 20 (int_expression -> INT .)
+    AND             reduce using rule 20 (int_expression -> INT .)
+
+
+state 29
+
+    (7) expressions_list -> expression SEMICOLON expressions_list .
+
+    RDUMBO          reduce using rule 7 (expressions_list -> expression SEMICOLON expressions_list .)
+    ENDIF           reduce using rule 7 (expressions_list -> expression SEMICOLON expressions_list .)
+    ENDFOR          reduce using rule 7 (expressions_list -> expression SEMICOLON expressions_list .)
+
+
+state 30
+
+    (19) string_expression -> string_expression DOT . string_expression
+    (17) string_expression -> . STRING
+    (18) string_expression -> . VARIABLE
+    (19) string_expression -> . string_expression DOT string_expression
+
+    STRING          shift and go to state 17
+    VARIABLE        shift and go to state 18
+
+    string_expression              shift and go to state 48
+
+state 31
+
+    (10) expression -> FOR VARIABLE IN . string_list DO expressions_list ENDFOR
+    (11) expression -> FOR VARIABLE IN . VARIABLE DO expressions_list ENDFOR
+    (32) string_list -> . LPAR string_list_interior RPAR
+
+    VARIABLE        shift and go to state 49
+    LPAR            shift and go to state 51
+
+    string_list                    shift and go to state 50
+
+state 32
+
+    (18) string_expression -> VARIABLE .
+    (23) int_term -> VARIABLE .
+    (30) boolean_term -> VARIABLE .
+
+    DOT             reduce using rule 18 (string_expression -> VARIABLE .)
+    SEMICOLON       reduce using rule 18 (string_expression -> VARIABLE .)
+    ADD_OP          reduce using rule 23 (int_term -> VARIABLE .)
+    MUL_OP          reduce using rule 23 (int_term -> VARIABLE .)
+    COMP            reduce using rule 23 (int_term -> VARIABLE .)
+    OR              reduce using rule 30 (boolean_term -> VARIABLE .)
+    AND             reduce using rule 30 (boolean_term -> VARIABLE .)
+
+
+state 33
+
+    (13) expression -> VARIABLE ASSIGNATION string_expression .
+    (19) string_expression -> string_expression . DOT string_expression
+
+    SEMICOLON       reduce using rule 13 (expression -> VARIABLE ASSIGNATION string_expression .)
+    DOT             shift and go to state 30
+
+
+state 34
+
+    (14) expression -> VARIABLE ASSIGNATION string_list .
+
+    SEMICOLON       reduce using rule 14 (expression -> VARIABLE ASSIGNATION string_list .)
+
+
+state 35
+
+    (15) expression -> VARIABLE ASSIGNATION int_expression .
+    (24) int_term -> int_expression .
+
+    SEMICOLON       reduce using rule 15 (expression -> VARIABLE ASSIGNATION int_expression .)
+    ADD_OP          reduce using rule 24 (int_term -> int_expression .)
+    MUL_OP          reduce using rule 24 (int_term -> int_expression .)
+    COMP            reduce using rule 24 (int_term -> int_expression .)
+
+
+state 36
+
+    (16) expression -> VARIABLE ASSIGNATION boolean_expression .
+    (31) boolean_term -> boolean_expression .
+
+    SEMICOLON       reduce using rule 16 (expression -> VARIABLE ASSIGNATION boolean_expression .)
+    OR              reduce using rule 31 (boolean_term -> boolean_expression .)
+    AND             reduce using rule 31 (boolean_term -> boolean_expression .)
+
+
+state 37
+
+    (32) string_list -> LPAR . string_list_interior RPAR
+    (25) int_term -> LPAR . int_expression RPAR
+    (33) string_list_interior -> . STRING
+    (34) string_list_interior -> . STRING COMMA string_list_interior
+    (20) int_expression -> . INT
+    (21) int_expression -> . int_term ADD_OP int_term
+    (22) int_expression -> . int_term MUL_OP int_term
+    (23) int_term -> . VARIABLE
+    (24) int_term -> . int_expression
+    (25) int_term -> . LPAR int_expression RPAR
+
+    STRING          shift and go to state 53
+    INT             shift and go to state 28
+    VARIABLE        shift and go to state 47
+    LPAR            shift and go to state 27
+
+    string_list_interior           shift and go to state 52
+    int_expression                 shift and go to state 45
+    int_term                       shift and go to state 46
+
+state 38
+
+    (21) int_expression -> int_term . ADD_OP int_term
+    (22) int_expression -> int_term . MUL_OP int_term
+    (27) boolean_expression -> int_term . COMP int_term
+
+    ADD_OP          shift and go to state 41
+    MUL_OP          shift and go to state 42
+    COMP            shift and go to state 40
+
+
+state 39
+
+    (12) expression -> IF boolean_expression DO . expressions_list ENDIF
+    (7) expressions_list -> . expression SEMICOLON expressions_list
+    (8) expressions_list -> . expression SEMICOLON
+    (9) expression -> . PRINT string_expression
+    (10) expression -> . FOR VARIABLE IN string_list DO expressions_list ENDFOR
+    (11) expression -> . FOR VARIABLE IN VARIABLE DO expressions_list ENDFOR
+    (12) expression -> . IF boolean_expression DO expressions_list ENDIF
+    (13) expression -> . VARIABLE ASSIGNATION string_expression
+    (14) expression -> . VARIABLE ASSIGNATION string_list
+    (15) expression -> . VARIABLE ASSIGNATION int_expression
+    (16) expression -> . VARIABLE ASSIGNATION boolean_expression
+
+    PRINT           shift and go to state 10
+    FOR             shift and go to state 11
+    IF              shift and go to state 13
+    VARIABLE        shift and go to state 12
+
+    expressions_list               shift and go to state 54
+    expression                     shift and go to state 9
+
+state 40
+
+    (27) boolean_expression -> int_term COMP . int_term
+    (23) int_term -> . VARIABLE
+    (24) int_term -> . int_expression
+    (25) int_term -> . LPAR int_expression RPAR
+    (20) int_expression -> . INT
+    (21) int_expression -> . int_term ADD_OP int_term
+    (22) int_expression -> . int_term MUL_OP int_term
+
+    VARIABLE        shift and go to state 47
+    LPAR            shift and go to state 27
+    INT             shift and go to state 28
+
+    int_term                       shift and go to state 55
+    int_expression                 shift and go to state 26
+
+state 41
+
+    (21) int_expression -> int_term ADD_OP . int_term
+    (23) int_term -> . VARIABLE
+    (24) int_term -> . int_expression
+    (25) int_term -> . LPAR int_expression RPAR
+    (20) int_expression -> . INT
+    (21) int_expression -> . int_term ADD_OP int_term
+    (22) int_expression -> . int_term MUL_OP int_term
+
+    VARIABLE        shift and go to state 47
+    LPAR            shift and go to state 27
+    INT             shift and go to state 28
+
+    int_term                       shift and go to state 56
+    int_expression                 shift and go to state 26
+
+state 42
+
+    (22) int_expression -> int_term MUL_OP . int_term
+    (23) int_term -> . VARIABLE
+    (24) int_term -> . int_expression
+    (25) int_term -> . LPAR int_expression RPAR
+    (20) int_expression -> . INT
+    (21) int_expression -> . int_term ADD_OP int_term
+    (22) int_expression -> . int_term MUL_OP int_term
+
+    VARIABLE        shift and go to state 47
+    LPAR            shift and go to state 27
+    INT             shift and go to state 28
+
+    int_term                       shift and go to state 57
+    int_expression                 shift and go to state 26
+
+state 43
+
+    (28) boolean_expression -> boolean_term OR . boolean_term
+    (30) boolean_term -> . VARIABLE
+    (31) boolean_term -> . boolean_expression
+    (26) boolean_expression -> . BOOL
+    (27) boolean_expression -> . int_term COMP int_term
+    (28) boolean_expression -> . boolean_term OR boolean_term
+    (29) boolean_expression -> . boolean_term AND boolean_term
+    (23) int_term -> . VARIABLE
+    (24) int_term -> . int_expression
+    (25) int_term -> . LPAR int_expression RPAR
+    (20) int_expression -> . INT
+    (21) int_expression -> . int_term ADD_OP int_term
+    (22) int_expression -> . int_term MUL_OP int_term
+
+    VARIABLE        shift and go to state 59
+    BOOL            shift and go to state 22
+    LPAR            shift and go to state 27
+    INT             shift and go to state 28
+
+    boolean_term                   shift and go to state 58
+    boolean_expression             shift and go to state 60
+    int_term                       shift and go to state 23
+    int_expression                 shift and go to state 26
+
+state 44
+
+    (29) boolean_expression -> boolean_term AND . boolean_term
+    (30) boolean_term -> . VARIABLE
+    (31) boolean_term -> . boolean_expression
+    (26) boolean_expression -> . BOOL
+    (27) boolean_expression -> . int_term COMP int_term
+    (28) boolean_expression -> . boolean_term OR boolean_term
+    (29) boolean_expression -> . boolean_term AND boolean_term
+    (23) int_term -> . VARIABLE
+    (24) int_term -> . int_expression
+    (25) int_term -> . LPAR int_expression RPAR
+    (20) int_expression -> . INT
+    (21) int_expression -> . int_term ADD_OP int_term
+    (22) int_expression -> . int_term MUL_OP int_term
+
+    VARIABLE        shift and go to state 59
+    BOOL            shift and go to state 22
+    LPAR            shift and go to state 27
+    INT             shift and go to state 28
+
+    boolean_term                   shift and go to state 61
+    boolean_expression             shift and go to state 60
+    int_term                       shift and go to state 23
+    int_expression                 shift and go to state 26
+
+state 45
+
+    (25) int_term -> LPAR int_expression . RPAR
+    (24) int_term -> int_expression .
+
+    RPAR            shift and go to state 62
+    ADD_OP          reduce using rule 24 (int_term -> int_expression .)
+    MUL_OP          reduce using rule 24 (int_term -> int_expression .)
+
+
+state 46
+
+    (21) int_expression -> int_term . ADD_OP int_term
+    (22) int_expression -> int_term . MUL_OP int_term
+
+    ADD_OP          shift and go to state 41
+    MUL_OP          shift and go to state 42
+
+
+state 47
+
+    (23) int_term -> VARIABLE .
+
+    ADD_OP          reduce using rule 23 (int_term -> VARIABLE .)
+    MUL_OP          reduce using rule 23 (int_term -> VARIABLE .)
+    DO              reduce using rule 23 (int_term -> VARIABLE .)
+    OR              reduce using rule 23 (int_term -> VARIABLE .)
+    AND             reduce using rule 23 (int_term -> VARIABLE .)
+    SEMICOLON       reduce using rule 23 (int_term -> VARIABLE .)
+    COMP            reduce using rule 23 (int_term -> VARIABLE .)
+    RPAR            reduce using rule 23 (int_term -> VARIABLE .)
+
+
+state 48
+
+    (19) string_expression -> string_expression DOT string_expression .
+    (19) string_expression -> string_expression . DOT string_expression
+
+    DOT             reduce using rule 19 (string_expression -> string_expression DOT string_expression .)
+    SEMICOLON       reduce using rule 19 (string_expression -> string_expression DOT string_expression .)
+
+  ! DOT             [ shift and go to state 30 ]
+
+
+state 49
+
+    (11) expression -> FOR VARIABLE IN VARIABLE . DO expressions_list ENDFOR
+
+    DO              shift and go to state 63
+
+
+state 50
+
+    (10) expression -> FOR VARIABLE IN string_list . DO expressions_list ENDFOR
+
+    DO              shift and go to state 64
+
+
+state 51
+
+    (32) string_list -> LPAR . string_list_interior RPAR
+    (33) string_list_interior -> . STRING
+    (34) string_list_interior -> . STRING COMMA string_list_interior
+
+    STRING          shift and go to state 53
+
+    string_list_interior           shift and go to state 52
+
+state 52
+
+    (32) string_list -> LPAR string_list_interior . RPAR
+
+    RPAR            shift and go to state 65
+
+
+state 53
+
+    (33) string_list_interior -> STRING .
+    (34) string_list_interior -> STRING . COMMA string_list_interior
+
+    RPAR            reduce using rule 33 (string_list_interior -> STRING .)
+    COMMA           shift and go to state 66
+
+
+state 54
+
+    (12) expression -> IF boolean_expression DO expressions_list . ENDIF
+
+    ENDIF           shift and go to state 67
+
+
+state 55
+
+    (27) boolean_expression -> int_term COMP int_term .
+    (21) int_expression -> int_term . ADD_OP int_term
+    (22) int_expression -> int_term . MUL_OP int_term
+
+    DO              reduce using rule 27 (boolean_expression -> int_term COMP int_term .)
+    OR              reduce using rule 27 (boolean_expression -> int_term COMP int_term .)
+    AND             reduce using rule 27 (boolean_expression -> int_term COMP int_term .)
+    SEMICOLON       reduce using rule 27 (boolean_expression -> int_term COMP int_term .)
+    ADD_OP          shift and go to state 41
+    MUL_OP          shift and go to state 42
+
+
+state 56
+
+    (21) int_expression -> int_term ADD_OP int_term .
+    (21) int_expression -> int_term . ADD_OP int_term
+    (22) int_expression -> int_term . MUL_OP int_term
+
+    COMP            reduce using rule 21 (int_expression -> int_term ADD_OP int_term .)
+    ADD_OP          reduce using rule 21 (int_expression -> int_term ADD_OP int_term .)
+    SEMICOLON       reduce using rule 21 (int_expression -> int_term ADD_OP int_term .)
+    RPAR            reduce using rule 21 (int_expression -> int_term ADD_OP int_term .)
+    DO              reduce using rule 21 (int_expression -> int_term ADD_OP int_term .)
+    OR              reduce using rule 21 (int_expression -> int_term ADD_OP int_term .)
+    AND             reduce using rule 21 (int_expression -> int_term ADD_OP int_term .)
+    MUL_OP          shift and go to state 42
+
+  ! MUL_OP          [ reduce using rule 21 (int_expression -> int_term ADD_OP int_term .) ]
+  ! ADD_OP          [ shift and go to state 41 ]
+
+
+state 57
+
+    (22) int_expression -> int_term MUL_OP int_term .
+    (21) int_expression -> int_term . ADD_OP int_term
+    (22) int_expression -> int_term . MUL_OP int_term
+
+    COMP            reduce using rule 22 (int_expression -> int_term MUL_OP int_term .)
+    ADD_OP          reduce using rule 22 (int_expression -> int_term MUL_OP int_term .)
+    MUL_OP          reduce using rule 22 (int_expression -> int_term MUL_OP int_term .)
+    SEMICOLON       reduce using rule 22 (int_expression -> int_term MUL_OP int_term .)
+    RPAR            reduce using rule 22 (int_expression -> int_term MUL_OP int_term .)
+    DO              reduce using rule 22 (int_expression -> int_term MUL_OP int_term .)
+    OR              reduce using rule 22 (int_expression -> int_term MUL_OP int_term .)
+    AND             reduce using rule 22 (int_expression -> int_term MUL_OP int_term .)
+
+  ! ADD_OP          [ shift and go to state 41 ]
+  ! MUL_OP          [ shift and go to state 42 ]
+
+
+state 58
+
+    (28) boolean_expression -> boolean_term OR boolean_term .
+    (28) boolean_expression -> boolean_term . OR boolean_term
+    (29) boolean_expression -> boolean_term . AND boolean_term
+
+    DO              reduce using rule 28 (boolean_expression -> boolean_term OR boolean_term .)
+    OR              reduce using rule 28 (boolean_expression -> boolean_term OR boolean_term .)
+    SEMICOLON       reduce using rule 28 (boolean_expression -> boolean_term OR boolean_term .)
+    AND             shift and go to state 44
+
+  ! AND             [ reduce using rule 28 (boolean_expression -> boolean_term OR boolean_term .) ]
+  ! OR              [ shift and go to state 43 ]
+
+
+state 59
+
+    (30) boolean_term -> VARIABLE .
+    (23) int_term -> VARIABLE .
+
+    OR              reduce using rule 30 (boolean_term -> VARIABLE .)
+    AND             reduce using rule 30 (boolean_term -> VARIABLE .)
+    DO              reduce using rule 30 (boolean_term -> VARIABLE .)
+    SEMICOLON       reduce using rule 30 (boolean_term -> VARIABLE .)
+    COMP            reduce using rule 23 (int_term -> VARIABLE .)
+    ADD_OP          reduce using rule 23 (int_term -> VARIABLE .)
+    MUL_OP          reduce using rule 23 (int_term -> VARIABLE .)
+
+
+state 60
+
+    (31) boolean_term -> boolean_expression .
+
+    OR              reduce using rule 31 (boolean_term -> boolean_expression .)
+    AND             reduce using rule 31 (boolean_term -> boolean_expression .)
+    DO              reduce using rule 31 (boolean_term -> boolean_expression .)
+    SEMICOLON       reduce using rule 31 (boolean_term -> boolean_expression .)
+
+
+state 61
+
+    (29) boolean_expression -> boolean_term AND boolean_term .
+    (28) boolean_expression -> boolean_term . OR boolean_term
+    (29) boolean_expression -> boolean_term . AND boolean_term
+
+    DO              reduce using rule 29 (boolean_expression -> boolean_term AND boolean_term .)
+    OR              reduce using rule 29 (boolean_expression -> boolean_term AND boolean_term .)
+    AND             reduce using rule 29 (boolean_expression -> boolean_term AND boolean_term .)
+    SEMICOLON       reduce using rule 29 (boolean_expression -> boolean_term AND boolean_term .)
+
+  ! OR              [ shift and go to state 43 ]
+  ! AND             [ shift and go to state 44 ]
+
+
+state 62
+
+    (25) int_term -> LPAR int_expression RPAR .
+
+    COMP            reduce using rule 25 (int_term -> LPAR int_expression RPAR .)
+    ADD_OP          reduce using rule 25 (int_term -> LPAR int_expression RPAR .)
+    MUL_OP          reduce using rule 25 (int_term -> LPAR int_expression RPAR .)
+    DO              reduce using rule 25 (int_term -> LPAR int_expression RPAR .)
+    OR              reduce using rule 25 (int_term -> LPAR int_expression RPAR .)
+    AND             reduce using rule 25 (int_term -> LPAR int_expression RPAR .)
+    SEMICOLON       reduce using rule 25 (int_term -> LPAR int_expression RPAR .)
+    RPAR            reduce using rule 25 (int_term -> LPAR int_expression RPAR .)
+
+
+state 63
+
+    (11) expression -> FOR VARIABLE IN VARIABLE DO . expressions_list ENDFOR
+    (7) expressions_list -> . expression SEMICOLON expressions_list
+    (8) expressions_list -> . expression SEMICOLON
+    (9) expression -> . PRINT string_expression
+    (10) expression -> . FOR VARIABLE IN string_list DO expressions_list ENDFOR
+    (11) expression -> . FOR VARIABLE IN VARIABLE DO expressions_list ENDFOR
+    (12) expression -> . IF boolean_expression DO expressions_list ENDIF
+    (13) expression -> . VARIABLE ASSIGNATION string_expression
+    (14) expression -> . VARIABLE ASSIGNATION string_list
+    (15) expression -> . VARIABLE ASSIGNATION int_expression
+    (16) expression -> . VARIABLE ASSIGNATION boolean_expression
+
+    PRINT           shift and go to state 10
+    FOR             shift and go to state 11
+    IF              shift and go to state 13
+    VARIABLE        shift and go to state 12
+
+    expressions_list               shift and go to state 68
+    expression                     shift and go to state 9
+
+state 64
+
+    (10) expression -> FOR VARIABLE IN string_list DO . expressions_list ENDFOR
+    (7) expressions_list -> . expression SEMICOLON expressions_list
+    (8) expressions_list -> . expression SEMICOLON
+    (9) expression -> . PRINT string_expression
+    (10) expression -> . FOR VARIABLE IN string_list DO expressions_list ENDFOR
+    (11) expression -> . FOR VARIABLE IN VARIABLE DO expressions_list ENDFOR
+    (12) expression -> . IF boolean_expression DO expressions_list ENDIF
+    (13) expression -> . VARIABLE ASSIGNATION string_expression
+    (14) expression -> . VARIABLE ASSIGNATION string_list
+    (15) expression -> . VARIABLE ASSIGNATION int_expression
+    (16) expression -> . VARIABLE ASSIGNATION boolean_expression
+
+    PRINT           shift and go to state 10
+    FOR             shift and go to state 11
+    IF              shift and go to state 13
+    VARIABLE        shift and go to state 12
+
+    expressions_list               shift and go to state 69
+    expression                     shift and go to state 9
+
+state 65
+
+    (32) string_list -> LPAR string_list_interior RPAR .
+
+    SEMICOLON       reduce using rule 32 (string_list -> LPAR string_list_interior RPAR .)
+    DO              reduce using rule 32 (string_list -> LPAR string_list_interior RPAR .)
+
+
+state 66
+
+    (34) string_list_interior -> STRING COMMA . string_list_interior
+    (33) string_list_interior -> . STRING
+    (34) string_list_interior -> . STRING COMMA string_list_interior
+
+    STRING          shift and go to state 53
+
+    string_list_interior           shift and go to state 70
+
+state 67
+
+    (12) expression -> IF boolean_expression DO expressions_list ENDIF .
+
+    SEMICOLON       reduce using rule 12 (expression -> IF boolean_expression DO expressions_list ENDIF .)
+
+
+state 68
+
+    (11) expression -> FOR VARIABLE IN VARIABLE DO expressions_list . ENDFOR
+
+    ENDFOR          shift and go to state 71
+
+
+state 69
+
+    (10) expression -> FOR VARIABLE IN string_list DO expressions_list . ENDFOR
+
+    ENDFOR          shift and go to state 72
+
+
+state 70
+
+    (34) string_list_interior -> STRING COMMA string_list_interior .
+
+    RPAR            reduce using rule 34 (string_list_interior -> STRING COMMA string_list_interior .)
+
+
+state 71
+
+    (11) expression -> FOR VARIABLE IN VARIABLE DO expressions_list ENDFOR .
+
+    SEMICOLON       reduce using rule 11 (expression -> FOR VARIABLE IN VARIABLE DO expressions_list ENDFOR .)
+
+
+state 72
+
+    (10) expression -> FOR VARIABLE IN string_list DO expressions_list ENDFOR .
+
+    SEMICOLON       reduce using rule 10 (expression -> FOR VARIABLE IN string_list DO expressions_list ENDFOR .)
+
